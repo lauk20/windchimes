@@ -7,7 +7,9 @@ part of 'location_data.dart';
 // **************************************************************************
 
 LocationData _$LocationDataFromJson(Map<String, dynamic> json) => LocationData(
-      results: json['results'] as List<dynamic>,
+      results: (json['results'] as List<dynamic>)
+          .map((e) => CityData.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$LocationDataToJson(LocationData instance) =>
