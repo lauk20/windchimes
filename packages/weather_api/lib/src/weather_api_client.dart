@@ -9,14 +9,14 @@ class WeatherAPIClient {
   static const _weatherUrl = 'api.open-meteo.com';
   static const _geocodingUrl = 'geocoding-api.open-meteo.com';
 
-  WeatherAPIClient(http.Client? client)
+  WeatherAPIClient({http.Client? client})
     : _httpClient = client ?? http.Client();
   
   Future<LocationData> getLocation(String location) async {
     final request = Uri.https(
       _geocodingUrl,
       '/v1/search',
-      {'name': location, 'count': 10},
+      {'name': location, 'count': '10'},
     );
 
     final response = await _httpClient.get(request);
