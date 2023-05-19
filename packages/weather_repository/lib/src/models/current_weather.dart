@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'weather_code.dart';
 
-part 'weather.g.dart';
+part 'current_weather.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 // class representing weather
