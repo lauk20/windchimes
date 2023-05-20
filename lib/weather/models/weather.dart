@@ -48,6 +48,28 @@ class Weather extends Equatable {
     );
   }
 
+  static final initialWeatherState = Weather(
+    currentWeather: const CurrentWeather(
+      location: '', 
+      temperature: 0, 
+      weathercode: weather_repository.WeatherCode.undefined,
+    ),
+    hourlyForecast: const HourlyWeather(
+      location: '', 
+      temperatures: [], 
+      precipitationProbabilities: [], 
+      weatherCodes: []
+    ),
+    dailyForecast: const DailyWeather(
+      location: '', 
+      temperaturesMax: [], 
+      temperaturesMin: [], 
+      precipitationProbabilities: [],
+      weatherCodes: []
+    ),
+    updated: DateTime(0),
+  );
+
   Map<String, dynamic> toJson() => _$WeatherToJson(this);
 
   @override
