@@ -28,4 +28,5 @@ const _$WeatherCodeEnumMap = {
   WeatherCode.rain: 'rain',
   WeatherCode.snow: 'snow',
   WeatherCode.thunderstorm: 'thunderstorm',
+  WeatherCode.undefined: 'undefined',
 };
