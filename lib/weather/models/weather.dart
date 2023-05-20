@@ -13,11 +13,13 @@ class Weather extends Equatable {
   final CurrentWeather currentWeather;
   final HourlyWeather hourlyForecast;
   final DailyWeather dailyForecast;
+  final DateTime updated;
 
   const Weather({
     required this.currentWeather,
     required this.hourlyForecast,
     required this.dailyForecast,
+    required this.updated,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) => _$WeatherFromJson(json);
@@ -41,7 +43,8 @@ class Weather extends Equatable {
         temperaturesMin: weather.dailyForecast.temperaturesMin,
         precipitationProbabilities: weather.dailyForecast.precipitationProbabilities,
         weatherCodes: weather.dailyForecast.weatherCodes,
-      )
+      ),
+      updated: DateTime.now(),
     );
   }
 
