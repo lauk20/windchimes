@@ -16,20 +16,20 @@ class WeatherRepository {
     final Weather currentWeather = Weather(
       location: city.name,
       temperature: weather.currentWeather['temperature'],
-      weathercode: weather.currentWeather['weathercode'].map((e) => int.parse(e).toCode).toList(),
+      weathercode: (weather.currentWeather['weathercode'] as int).toCode,
     );
     final HourlyForecast hourlyForecast = HourlyForecast(
       location: city.name, 
-      temperatures: weather.hourly['temperature_2m'], 
-      precipitationProbabilities: weather.hourly['precipitation_probabiliy'], 
-      weatherCodes: weather.hourly['weathercode'].map((e) => int.parse(e).toCode).toList(),
+      temperatures: List<double>.from(weather.hourly['temperature_2m']),
+      precipitationProbabilities: List<double>.from(weather.hourly['precipitation_probability'].map((e) => (e as int).toDouble()).toList()),
+      weatherCodes: List<WeatherCode>.from(weather.hourly['weathercode'].map((e) => (e as int).toCode).toList()),
     );
     final DailyForecast dailyForecast = DailyForecast(
       location: city.name,
-      temperaturesMax: weather.daily['temperature_2m_max'], 
-      temperaturesMin: weather.daily['temperature_2m_min'], 
-      precipitationProbabilities: weather.daily['precipitation_probability_max'], 
-      weatherCodes: weather.daily['weathercode'].map((e) => int.parse(e).toCode).toList(),
+      temperaturesMax: List<double>.from(weather.daily['temperature_2m_max']),
+      temperaturesMin: List<double>.from(weather.daily['temperature_2m_min']),
+      precipitationProbabilities: List<double>.from(weather.daily['precipitation_probability_max'].map((e) => (e as int).toDouble()).toList()),
+      weatherCodes: List<WeatherCode>.from(weather.daily['weathercode'].map((e) => (e as int).toCode).toList()),
     );
 
     return WeatherLocation(
