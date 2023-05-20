@@ -8,4 +8,5 @@ enum WeatherCode {
   rain,
   snow,
   thunderstorm,
+  undefined,
 }
