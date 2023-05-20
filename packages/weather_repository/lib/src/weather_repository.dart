@@ -4,14 +4,14 @@ import 'package:weather_repository/src/models/models.dart';
 
 class WeatherRepository {
   final WeatherAPIClient _client;
-  final List<CityData> selectedCities;
+  final List<City> selectedCities;
 
-  WeatherRepository(WeatherAPIClient? client)
+  WeatherRepository({WeatherAPIClient? client})
     : _client = client ?? WeatherAPIClient(),
       selectedCities = [];
   
   /// Get WeatherLocation object data for a specific CityData city
-  Future<WeatherLocation> getLocationWeather(CityData city) async {
+  Future<WeatherLocation> getLocationWeather(City city) async {
     final WeatherData weather = await _client.getWeather(latitude: city.latitude, longitude: city.longitude);
     final Weather currentWeather = Weather(
       location: city.name,
@@ -40,14 +40,20 @@ class WeatherRepository {
   }
 
   /// Get LocationData (search resuts for a city)
-  Future<LocationData> getLocationSearchResults(String city) async {
-    final LocationData results = await _client.getLocation(city);
+  Future<List<City>> getLocationSearchResults(String city) async {
+    final LocationData locations = await _client.getLocation(city);
 
-    return results;
+    return locations.results.map((e) => City(
+      latitude: e.latitude,
+      longitude: e.longitude,
+      name: e.name,
+      countryId: e.countryId,
+      admin1: e.admin1,
+    )).toList();
   }
 
   /// Add a city to get weather data from
-  void addCity(CityData city) {
+  void addCity(City city) {
     selectedCities.add(city);
   }
 
@@ -57,7 +63,7 @@ class WeatherRepository {
   }
 
   /// get the selectedCities
-  List<CityData> get cities => selectedCities;
+  List<City> get cities => selectedCities;
 }
 
 /// extension to convert weather code ints to WeatherCode enum
