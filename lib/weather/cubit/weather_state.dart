@@ -17,12 +17,18 @@ class WeatherState extends Equatable {
   final Weather weather;
   final LoadingState loadingState;
   final TemperatureUnits temperatureUnits;
+  final List<Location> selectedCities;
+  final Location selectedCity;
 
   WeatherState({
     Weather? weather,
     this.loadingState = LoadingState.initial,
     this.temperatureUnits = TemperatureUnits.celsius,
-  }) : weather = weather ?? Weather.initialWeatherState;
+    List<Location>? selectedCities,
+    Location? selectedCity,
+  }) : weather = weather ?? Weather.initialWeatherState, 
+       selectedCities = selectedCities ?? [],
+       selectedCity = Location.initialLocationState;
 
   factory WeatherState.fromJson(Map<String, dynamic> json) => _$WeatherStateFromJson(json);
 
@@ -32,11 +38,15 @@ class WeatherState extends Equatable {
     Weather? weather,
     LoadingState? loadingState,
     TemperatureUnits? temperatureUnits,
+    List<Location>? selectedCities,
+    Location? selectedCity,
   }) {
     return WeatherState(
       weather: weather ?? this.weather,
       loadingState: loadingState ?? this.loadingState,
       temperatureUnits: temperatureUnits ?? this.temperatureUnits,
+      selectedCities: selectedCities ?? this.selectedCities,
+      selectedCity: selectedCity ?? this.selectedCity,
     );
   }
 

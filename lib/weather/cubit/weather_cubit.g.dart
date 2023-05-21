@@ -16,6 +16,12 @@ WeatherState _$WeatherStateFromJson(Map<String, dynamic> json) => WeatherState(
       temperatureUnits: $enumDecodeNullable(
               _$TemperatureUnitsEnumMap, json['temperatureUnits']) ??
           TemperatureUnits.celsius,
+      selectedCities: (json['selectedCities'] as List<dynamic>?)
+          ?.map((e) => Location.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      selectedCity: json['selectedCity'] == null
+          ? null
+          : Location.fromJson(json['selectedCity'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$WeatherStateToJson(WeatherState instance) =>
@@ -23,6 +29,8 @@ Map<String, dynamic> _$WeatherStateToJson(WeatherState instance) =>
       'weather': instance.weather,
       'loadingState': _$LoadingStateEnumMap[instance.loadingState]!,
       'temperatureUnits': _$TemperatureUnitsEnumMap[instance.temperatureUnits]!,
+      'selectedCities': instance.selectedCities,
+      'selectedCity': instance.selectedCity,
     };
 
 const _$LoadingStateEnumMap = {
