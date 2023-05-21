@@ -37,6 +37,32 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
     }
   }
 
+  Future<List<Location>> getLocationResults(String location) async {
+    final List<City> results = await weatherRepository.getLocationSearchResults(location);
+
+    return results.map((e) => Location(
+      latitude: e.latitude,
+      longitude: e.longitude,
+      name: e.name,
+      countryId: e.countryId,
+      admin1: e.admin1,
+    )).toList();
+  }
+
+  void setLocation(Location location) {
+    emit(state.copyWith(selectedCity: location));
+  }
+
+  void addLocation(Location location) {
+    emit(state.copyWith(selectedCities: [...state.selectedCities, location]));
+  }
+
+  void removeLocation(String location) {
+    final List<Location> cities = [...state.selectedCities];
+    cities.removeWhere((element) => element.name == location);
+    emit(state.copyWith(selectedCities: cities));
+  }
+
   @override
   WeatherState fromJson(Map<String, dynamic> json) => WeatherState.fromJson(json);
 
