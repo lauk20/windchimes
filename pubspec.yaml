@@ -38,6 +38,7 @@ dependencies:
   json_annotation: ^4.8.1
   weather_repository:
     path: packages/weather_repository
+  path_provider: ^2.0.8
 
 
   # The following adds the Cupertino Icons font to your application.
