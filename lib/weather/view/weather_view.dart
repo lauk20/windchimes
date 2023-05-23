@@ -29,10 +29,12 @@ class _WeatherViewState extends State<WeatherView> {
   @override
   Widget build(BuildContext context) {
     developer.log('rebuilding');
+    context.read<WeatherCubit>().addLocation(const Location(admin1: "test", latitude: 3.14, longitude: 3.1415, name: "tester", countryId: 12345));
     return Scaffold(
       body: Center(
         child: BlocBuilder<WeatherCubit, WeatherState>(
           builder: (context, state) {
+            developer.log("blockrebuilding");
             switch (state.loadingState) {
               case LoadingState.initial:
                 return const WeatherEmpty();
@@ -55,11 +57,25 @@ class _WeatherViewState extends State<WeatherView> {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.search),
         onPressed: () async {
+          final cubit = context.read<WeatherCubit>();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BlocProvider.value(
+                value: cubit,
+                child: const SearchPage(),
+              )
+            )
+          ).then((location) async {
+            await cubit.getWeather(location);
+          });
+          /*
           final cityText = await Navigator.of(context).pushNamed('/search');
           if (!mounted) return;
           WeatherCubit wc = context.read<WeatherCubit>();
           final List<Location> results = await wc.getLocationResults(cityText as String);
           await wc.getWeather(results.first);
+          */
         }
       ),
     );

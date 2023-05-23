@@ -31,12 +31,7 @@ class WeatherAppView extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        //home: const WeatherPage(),
-        routes: {
-          '/': (context) => const WeatherPage(),
-          '/search': (context) => const SearchPage(),
-        },
-        initialRoute: '/',
+        home: const WeatherPage(),
       )
     );
   }
