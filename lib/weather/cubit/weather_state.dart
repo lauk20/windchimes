@@ -28,7 +28,7 @@ class WeatherState extends Equatable {
     Location? selectedCity,
   }) : weather = weather ?? Weather.initialWeatherState, 
        selectedCities = selectedCities ?? [],
-       selectedCity = Location.initialLocationState;
+       selectedCity = selectedCity ?? Location.initialLocationState;
 
   factory WeatherState.fromJson(Map<String, dynamic> json) => _$WeatherStateFromJson(json);
 
