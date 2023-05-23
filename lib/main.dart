@@ -10,7 +10,8 @@ void main() async {
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
         ? HydratedStorage.webStorageDirectory
-        : await getTemporaryDirectory(),
+        : await getApplicationSupportDirectory(),
   );
+  HydratedBloc.storage.clear();
   runApp(WeatherApp(weatherRepository: WeatherRepository()));
 }

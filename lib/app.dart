@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:windchimes/weather/weather.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_repository/weather_repository.dart';
+import 'package:windchimes/weather/view/search_view.dart';
 
 class WeatherApp extends StatelessWidget {
   const WeatherApp({required WeatherRepository weatherRepository, super.key})
@@ -24,11 +25,19 @@ class WeatherAppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      home: const WeatherPage()
+    return BlocProvider<WeatherCubit> (
+      create: (context) => WeatherCubit(context.read<WeatherRepository>()),
+      child: MaterialApp(
+        theme: ThemeData(
+          useMaterial3: true,
+        ),
+        //home: const WeatherPage(),
+        routes: {
+          '/': (context) => const WeatherPage(),
+          '/search': (context) => const SearchPage(),
+        },
+        initialRoute: '/',
+      )
     );
   }
 }

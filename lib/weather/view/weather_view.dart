@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_repository/weather_repository.dart';
 import 'package:windchimes/weather/weather.dart';
+import 'search_view.dart';
+import 'dart:developer' as developer;
 
 
 class WeatherPage extends StatelessWidget {
@@ -26,6 +28,7 @@ class WeatherView extends StatefulWidget {
 class _WeatherViewState extends State<WeatherView> {
   @override
   Widget build(BuildContext context) {
+    developer.log('rebuilding');
     return Scaffold(
       body: Center(
         child: BlocBuilder<WeatherCubit, WeatherState>(
@@ -38,7 +41,7 @@ class _WeatherViewState extends State<WeatherView> {
                   weather: state.weather,
                   units: TemperatureUnits.celsius,
                   onRefresh: () {
-                    return context.read<WeatherCubit>().getWeather();
+                    return context.read<WeatherCubit>().getWeather(state.selectedCity);
                   },
                 );
               case LoadingState.failure:
@@ -48,7 +51,17 @@ class _WeatherViewState extends State<WeatherView> {
             }
           },
         )
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.search),
+        onPressed: () async {
+          final cityText = await Navigator.of(context).pushNamed('/search');
+          if (!mounted) return;
+          WeatherCubit wc = context.read<WeatherCubit>();
+          final List<Location> results = await wc.getLocationResults(cityText as String);
+          await wc.getWeather(results.first);
+        }
+      ),
     );
   }
 }
