@@ -1,3 +1,5 @@
+// source: https://stackoverflow.com/a/75945137
+
 import 'package:flutter/material.dart';
 
 class FadingListView extends StatefulWidget {
