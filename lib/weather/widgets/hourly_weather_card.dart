@@ -2,7 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:windchimes/weather/widgets/weather_icons.dart';
 
 class HourlyWeatherCard extends StatelessWidget {
-  const HourlyWeatherCard({super.key});
+  final int temperature;
+  final int precipitation;
+  final String weathercode;
+  final String time;
+
+  const HourlyWeatherCard({
+    super.key,
+    required this.temperature,
+    required this.precipitation,
+    required this.weathercode,
+    required this.time,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +26,7 @@ class HourlyWeatherCard extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "12 PM", 
+              time, 
               style: theme.textTheme.labelSmall
             ),
             const Expanded(
@@ -27,7 +38,7 @@ class HourlyWeatherCard extends StatelessWidget {
               )
             ),
             Text(
-              "80°", 
+              "${temperature.toString()}°", 
               style: theme.textTheme.labelMedium
             ),
             Row(
@@ -38,7 +49,7 @@ class HourlyWeatherCard extends StatelessWidget {
                   size: 15,
                 ),
                 Text(
-                  "100%", 
+                  "${precipitation.toString()}%", 
                   style: theme.textTheme.labelSmall
                 ),
               ],

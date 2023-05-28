@@ -10,11 +10,13 @@ class Weather extends Equatable {
   final String location;
   final double temperature;
   final WeatherCode weathercode;
+  final DateTime time;
 
   const Weather({
     required this.location,
     required this.temperature,
     required this.weathercode,
+    required this.time,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) => _$WeatherFromJson(json);
@@ -22,5 +24,5 @@ class Weather extends Equatable {
   Map<String, dynamic> toJson() => _$WeatherToJson(this);
 
   @override
-  List<Object> get props => [location, temperature, weathercode];
+  List<Object> get props => [location, temperature, weathercode, time];
 }

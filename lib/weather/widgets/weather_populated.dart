@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:windchimes/weather/weather.dart';
 import 'package:windchimes/weather/widgets/weather_icons.dart';
+import 'dart:developer' as developer;
 
 class WeatherPopulated extends StatelessWidget {
   const WeatherPopulated({
@@ -22,6 +23,8 @@ class WeatherPopulated extends StatelessWidget {
     final CurrentWeather currentWeather = weather.currentWeather;
     final HourlyWeather hourlyWeather = weather.hourlyForecast;
     final DailyWeather dailyWeather = weather.dailyForecast;
+
+    developer.log(hourlyWeather.times.toString());
 
     return SingleChildScrollView(
       child: Column(
@@ -85,15 +88,17 @@ class WeatherPopulated extends StatelessWidget {
                         child: FadingListView(
                           child: ListView(
                             scrollDirection: Axis.horizontal,
-                            children: const [
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
-                            ]
+                            children: hourlyWeather.times.asMap().entries.map((e) {
+                              int index = e.key;
+                              String time = e.value;
+                              
+                              return HourlyWeatherCard(
+                                temperature: hourlyWeather.temperatures[index].toInt(), 
+                                precipitation: hourlyWeather.precipitationProbabilities[index].toInt(),
+                                weathercode: hourlyWeather.weatherCodes[index],
+                                time: time,
+                              );
+                            }).toList(),
                           )
                         )
                       )

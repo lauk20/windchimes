@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:weather_repository/weather_repository.dart' as weather_repository;
 import 'models.dart';
+import 'dart:developer' as developer;
 
 part 'weather.g.dart';
 
@@ -25,6 +26,7 @@ class Weather extends Equatable {
   factory Weather.fromJson(Map<String, dynamic> json) => _$WeatherFromJson(json);
   
   factory Weather.fromRepository(weather_repository.WeatherLocation weather) {
+    
     return Weather(
       currentWeather: CurrentWeather(
         location: weather.currentWeather.location,
@@ -35,7 +37,18 @@ class Weather extends Equatable {
         location: weather.hourlyForecast.location,
         temperatures: weather.hourlyForecast.temperatures,
         precipitationProbabilities: weather.hourlyForecast.precipitationProbabilities,
-        weatherCodes: weather.hourlyForecast.weatherCodes,
+        weatherCodes: (weather.hourlyForecast.weatherCodes).map((e) => e.toName()).toList(),
+        times: weather.hourlyForecast.times.map((e) {
+          developer.log(e.toString());
+          int hour = DateTime.parse(e).hour;
+          if (hour < 12) {
+            return '${hour.toString()} AM';
+          } else if (hour == 12) {
+            return '12 PM';
+          } else {
+            return '${(hour - 12).toString()} PM';
+          }
+        }).toList(),
       ),
       dailyForecast: DailyWeather(
         location: weather.dailyForecast.location,
@@ -58,7 +71,8 @@ class Weather extends Equatable {
       location: '', 
       temperatures: [], 
       precipitationProbabilities: [], 
-      weatherCodes: []
+      weatherCodes: [],
+      times: [],
     ),
     dailyForecast: const DailyWeather(
       location: '', 

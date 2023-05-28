@@ -72,13 +72,7 @@ class WeatherEmpty extends StatelessWidget {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: const [
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
-                              HourlyWeatherCard(),
+                              
                             ]
                           )
                         )

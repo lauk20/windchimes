@@ -9,13 +9,15 @@ class HourlyWeather extends Equatable {
   final String location;
   final List<double> temperatures;
   final List<double> precipitationProbabilities;
-  final List<WeatherCode> weatherCodes;
+  final List<String> weatherCodes;
+  final List<String> times;
 
   const HourlyWeather({
     required this.location,
     required this.temperatures,
     required this.precipitationProbabilities,
     required this.weatherCodes,
+    required this.times,
   });
 
   factory HourlyWeather.fromJson(Map<String, dynamic> json) => _$HourlyWeatherFromJson(json);
@@ -26,13 +28,15 @@ class HourlyWeather extends Equatable {
     String? location,
     List<double>? temperatures,
     List<double>? precipitationProbabilities,
-    List<WeatherCode>? weatherCodes,
+    List<String>? weatherCodes,
+    List<String>? times,
   }) {
     return HourlyWeather(
       location: location ?? this.location,
       temperatures: temperatures ?? this.temperatures,
       precipitationProbabilities: precipitationProbabilities ?? this.precipitationProbabilities,
       weatherCodes: weatherCodes ?? this.weatherCodes,
+      times: times ?? this.times,
     );
   }
 

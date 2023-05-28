@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:weather_api/weather_api.dart';
 import 'package:weather_repository/src/models/models.dart';
+import 'dart:developer' as developer;
 
 class WeatherRepository {
   final WeatherAPIClient _client;
@@ -13,16 +14,31 @@ class WeatherRepository {
   /// Get WeatherLocation object data for a specific CityData city
   Future<WeatherLocation> getLocationWeather(City city) async {
     final WeatherData weather = await _client.getWeather(latitude: city.latitude, longitude: city.longitude);
+    
+    DateTime currentTime = DateTime.parse(weather.currentWeather['time']);
+    developer.log(currentTime.toString());
+    developer.log(weather.currentWeather['time']);
+    int startIndex = 0;
+    for (final e in weather.hourly['time']) {
+      if (DateTime.parse(e).isBefore(currentTime)) {
+        startIndex = startIndex + 1;
+      } else {
+        break;
+      }
+    }
+    
     final Weather currentWeather = Weather(
       location: city.name,
       temperature: weather.currentWeather['temperature'],
       weathercode: (weather.currentWeather['weathercode'] as int).toCode,
+      time: currentTime,
     );
     final HourlyForecast hourlyForecast = HourlyForecast(
       location: city.name, 
       temperatures: List<double>.from(weather.hourly['temperature_2m']),
-      precipitationProbabilities: List<double>.from(weather.hourly['precipitation_probability'].map((e) => (e as int).toDouble()).toList()),
-      weatherCodes: List<WeatherCode>.from(weather.hourly['weathercode'].map((e) => (e as int).toCode).toList()),
+      precipitationProbabilities: List<double>.from(weather.hourly['precipitation_probability'].sublist(startIndex, startIndex + 12).map((e) => (e as int).toDouble()).toList()),
+      weatherCodes: List<WeatherCode>.from(weather.hourly['weathercode'].sublist(startIndex, startIndex + 12).map((e) => (e as int).toCode).toList()),
+      times: List<String>.from(weather.hourly['time'].sublist(startIndex, startIndex + 12)),
     );
     final DailyForecast dailyForecast = DailyForecast(
       location: city.name,

@@ -40,7 +40,7 @@ class WeatherAPIClient {
         'hourly': ['temperature_2m', 'precipitation_probability', 'weathercode'],
         'daily': ['weathercode', 'temperature_2m_max', 'temperature_2m_min', 'sunrise', 'sunset', 'precipitation_probability_max'],
         'current_weather': 'true',
-        'timezone': 'UTC'
+        'timezone': 'auto'
       }));
     
     final response = await _httpClient.get(request);

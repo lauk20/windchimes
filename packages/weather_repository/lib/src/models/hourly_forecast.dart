@@ -10,12 +10,14 @@ class HourlyForecast extends Equatable {
   final List<double> temperatures;
   final List<double> precipitationProbabilities;
   final List<WeatherCode> weatherCodes;
+  final List<String> times;
 
   const HourlyForecast({
     required this.location,
     required this.temperatures,
     required this.precipitationProbabilities,
     required this.weatherCodes,
+    required this.times,
   });
 
   factory HourlyForecast.fromJson(Map<String, dynamic> json) => _$HourlyForecastFromJson(json);
@@ -23,5 +25,5 @@ class HourlyForecast extends Equatable {
   Map<String, dynamic> toJson() => _$HourlyForecastToJson(this);
 
   @override
-  List<Object> get props => [location, temperatures, precipitationProbabilities, weatherCodes];
+  List<Object> get props => [location, temperatures, precipitationProbabilities, weatherCodes, times];
 }

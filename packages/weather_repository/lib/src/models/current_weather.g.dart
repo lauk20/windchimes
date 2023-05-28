@@ -10,12 +10,14 @@ Weather _$WeatherFromJson(Map<String, dynamic> json) => Weather(
       location: json['location'] as String,
       temperature: (json['temperature'] as num).toDouble(),
       weathercode: $enumDecode(_$WeatherCodeEnumMap, json['weathercode']),
+      time: DateTime.parse(json['time'] as String),
     );
 
 Map<String, dynamic> _$WeatherToJson(Weather instance) => <String, dynamic>{
       'location': instance.location,
       'temperature': instance.temperature,
       'weathercode': _$WeatherCodeEnumMap[instance.weathercode]!,
+      'time': instance.time.toIso8601String(),
     };
 
 const _$WeatherCodeEnumMap = {
