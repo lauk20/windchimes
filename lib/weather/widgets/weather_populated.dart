@@ -38,8 +38,8 @@ class WeatherPopulated extends StatelessWidget {
             child: IntrinsicHeight(
               child: Row(
                 children: [
-                  Expanded(
-                    flex: 2,
+                  FittedBox(
+                    //flex: 2,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
