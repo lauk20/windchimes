@@ -29,7 +29,7 @@ class Weather extends Equatable {
       currentWeather: CurrentWeather(
         location: weather.currentWeather.location,
         temperature: weather.currentWeather.temperature,
-        weathercode: weather.currentWeather.weathercode,
+        weathercode: weather.currentWeather.weathercode.toName(),
       ),
       hourlyForecast: HourlyWeather(
         location: weather.hourlyForecast.location,
@@ -52,7 +52,7 @@ class Weather extends Equatable {
     currentWeather: const CurrentWeather(
       location: '', 
       temperature: 0, 
-      weathercode: weather_repository.WeatherCode.undefined,
+      weathercode: 'Unknown',
     ),
     hourlyForecast: const HourlyWeather(
       location: '', 
@@ -74,4 +74,31 @@ class Weather extends Equatable {
 
   @override
   List<Object> get props => [currentWeather, hourlyForecast, dailyForecast, updated];
+}
+
+extension on weather_repository.WeatherCode {
+  String toName() {
+    switch(this) {
+      case (weather_repository.WeatherCode.clearSky):
+        return "Sunny";
+      case (weather_repository.WeatherCode.mainlyClear):
+        return "Sunny";
+      case (weather_repository.WeatherCode.partlyCloudy):
+        return "Partly Cloudy";
+      case (weather_repository.WeatherCode.overcast):
+        return "Cloudy";
+      case (weather_repository.WeatherCode.fog):
+        return "Fog";
+      case (weather_repository.WeatherCode.drizzle):
+        return "Drizzle";
+      case (weather_repository.WeatherCode.rain):
+        return "Rain";
+      case (weather_repository.WeatherCode.snow):
+        return "Snow";
+      case (weather_repository.WeatherCode.thunderstorm):
+        return "Thunderstorm";
+      default:
+        return "Undefined";
+    }
+  }
 }

@@ -8,7 +8,7 @@ part 'current_weather.g.dart';
 class CurrentWeather extends Equatable {
   final String location;
   final double temperature;
-  final WeatherCode weathercode;
+  final String weathercode;
 
   const CurrentWeather({
     required this.location,
@@ -23,7 +23,7 @@ class CurrentWeather extends Equatable {
   CurrentWeather copyWith({
     String? location,
     double? temperature,
-    WeatherCode? weathercode,
+    String? weathercode,
   }) {
     return CurrentWeather(
       location: location ?? this.location,

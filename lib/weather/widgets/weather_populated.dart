@@ -19,6 +19,9 @@ class WeatherPopulated extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    final CurrentWeather currentWeather = weather.currentWeather;
+    final HourlyWeather hourlyWeather = weather.hourlyForecast;
+    final DailyWeather dailyWeather = weather.dailyForecast;
 
     return SingleChildScrollView(
       child: Column(
@@ -44,11 +47,11 @@ class WeatherPopulated extends StatelessWidget {
                           softWrap: false,
                         ),
                         Text(
-                          "75°",
+                          "${currentWeather.temperature.toInt().toString()}°",
                           style: theme.textTheme.displayLarge,
                         ),
                         Text(
-                          "Sunny",
+                          currentWeather.weathercode,
                           style: theme.textTheme.titleLarge,
                         ),
                       ],
