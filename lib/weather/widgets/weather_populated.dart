@@ -39,6 +39,7 @@ class WeatherPopulated extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(
+                    flex: 2,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,6 +57,7 @@ class WeatherPopulated extends StatelessWidget {
                         Text(
                           currentWeather.weathercode,
                           style: theme.textTheme.titleLarge,
+                          overflow: TextOverflow.clip,
                         ),
                       ],
                     ),
