@@ -24,11 +24,11 @@ class Location extends Equatable {
   Map<String, dynamic> toJson() => _$LocationToJson(this);
 
   static const initialLocationState = Location(
-    latitude: -1,
-    longitude: -1,
-    name: '',
-    countryId: -1,
-    admin1: '',
+    latitude: 37.77493,
+    longitude: -122.41942,
+    name: 'San Francisco',
+    countryId: 6252001,
+    admin1: 'California',
   );
 
   @override

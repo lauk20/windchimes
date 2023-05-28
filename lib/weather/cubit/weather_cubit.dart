@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:weather_repository/weather_repository.dart'show WeatherRepository, City, WeatherLocation;
 import '../models/models.dart';
-import 'dart:developer' as developer;
 
 part 'weather_state.dart';
 part 'weather_cubit.g.dart';
@@ -14,11 +13,9 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
   WeatherCubit(this.weatherRepository) : super(WeatherState());
 
   Future<void> getWeather(Location loc) async {
-    developer.log('in getWeather');
     //if (state.selectedCity.countryId == -1) return;
 
     emit(state.copyWith(loadingState: LoadingState.loading));
-    developer.log('should be loading state');
     try {
       /*
       final City city = City(
@@ -43,7 +40,6 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
         weather: weather,
         loadingState: LoadingState.success,
       ));
-      developer.log('success');
     } on Exception {
       emit(state.copyWith(loadingState: LoadingState.failure));
     }

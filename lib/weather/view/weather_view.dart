@@ -13,7 +13,9 @@ class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<WeatherCubit>(
-      create: (context) => WeatherCubit(context.read<WeatherRepository>()),
+      create: (context) {
+        return BlocProvider.of<WeatherCubit>(context);
+      },
       child: const WeatherView(),
     );
   }
@@ -30,7 +32,7 @@ class _WeatherViewState extends State<WeatherView> {
   @override
   Widget build(BuildContext context) {
     developer.log('rebuilding');
-    context.read<WeatherCubit>().addLocation(const Location(admin1: "test", latitude: 3.14, longitude: 3.1415, name: "tester", countryId: 12345));
+
     return SafeArea(
       child: Scaffold(
         //backgroundColor:Color.fromRGBO(8, 27, 37, 80),
@@ -58,6 +60,7 @@ class _WeatherViewState extends State<WeatherView> {
                       developer.log("anima");
                       return context.read<WeatherCubit>().getWeather(state.selectedCity);
                     },
+                    location: state.selectedCity,
                   );
                 case LoadingState.failure:
                   return const WeatherFailure();

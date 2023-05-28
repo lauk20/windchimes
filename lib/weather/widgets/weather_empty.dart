@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:windchimes/weather/weather.dart';
-import 'package:windchimes/weather/widgets/daily_weather_card.dart';
 import 'package:windchimes/weather/widgets/weather_icons.dart';
 
 class WeatherEmpty extends StatelessWidget {
@@ -28,17 +27,17 @@ class WeatherEmpty extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "San Francisco",
+                          "-",
                           style: theme.textTheme.titleSmall,
                           overflow: TextOverflow.ellipsis,
                           softWrap: false,
                         ),
                         Text(
-                          "75°",
+                          "-",
                           style: theme.textTheme.displayLarge,
                         ),
                         Text(
-                          "Sunny",
+                          "-",
                           style: theme.textTheme.titleLarge,
                         ),
                       ],

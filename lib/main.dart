@@ -7,11 +7,13 @@ import 'package:weather_repository/weather_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
         ? HydratedStorage.webStorageDirectory
         : await getApplicationSupportDirectory(),
   );
-  HydratedBloc.storage.clear();
+  await HydratedBloc.storage.clear();
+
   runApp(WeatherApp(weatherRepository: WeatherRepository()));
 }

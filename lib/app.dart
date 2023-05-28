@@ -5,6 +5,7 @@ import 'package:windchimes/weather/weather.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_repository/weather_repository.dart';
 import 'package:windchimes/weather/view/search_view.dart';
+import 'dart:developer' as developer;
 
 class WeatherApp extends StatelessWidget {
   const WeatherApp({required WeatherRepository weatherRepository, super.key})
@@ -27,7 +28,15 @@ class WeatherAppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<WeatherCubit> (
-      create: (context) => WeatherCubit(context.read<WeatherRepository>()),
+      lazy: false,
+      create: (context) {
+        developer.log("inside");
+        WeatherCubit wc = WeatherCubit(context.read<WeatherRepository>());
+        developer.log(wc.state.toString());
+        wc.getWeather(wc.state.selectedCity);
+        developer.log(wc.state.weather.toString());
+        return wc;
+      },
       child: MaterialApp(
         theme: ThemeData(
           useMaterial3: true,

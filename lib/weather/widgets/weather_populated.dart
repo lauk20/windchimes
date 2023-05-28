@@ -1,54 +1,142 @@
 import 'package:flutter/material.dart';
 import 'package:windchimes/weather/weather.dart';
+import 'package:windchimes/weather/widgets/weather_icons.dart';
 
 class WeatherPopulated extends StatelessWidget {
   const WeatherPopulated({
     required this.weather,
     required this.units,
     required this.onRefresh,
+    required this.location,
     super.key,
   });
 
   final Weather weather;
   final TemperatureUnits units;
   final ValueGetter<Future<void>> onRefresh;
+  final Location location;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Stack(
-      children: [
-        _WeatherBackground(),
-        RefreshIndicator(
-          onRefresh: onRefresh,
-          child: SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            clipBehavior: Clip.none,
-            child: Center(
-              child: Column(
+    final ThemeData theme = Theme.of(context);
+
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Current Weather
+          Padding(
+            padding: const EdgeInsets.only(left: 24, right: 24, top: 24, bottom: 32),
+            child: IntrinsicHeight(
+              child: Row(
                 children: [
-                  const SizedBox(height: 48),
-                  Text(
-                    weather.currentWeather.location,
-                    style: theme.textTheme.displayMedium?.copyWith(
-                      fontWeight: FontWeight.w200,
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          location.name,
+                          style: theme.textTheme.titleSmall,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: false,
+                        ),
+                        Text(
+                          "75°",
+                          style: theme.textTheme.displayLarge,
+                        ),
+                        Text(
+                          "Sunny",
+                          style: theme.textTheme.titleLarge,
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    weather.formattedTemperature(units),
-                    style: theme.textTheme.displaySmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                  const Expanded(
+                    child: FittedBox(
+                      child: WeatherIcons.sunnyIcon
+                    )
                   ),
-                  Text(
-                    '''Last Updated at ${TimeOfDay.fromDateTime(weather.updated).format(context)}''',
-                  ),
-                ],
-              ),
-            ),
+                ]
+              )
+            )
           ),
-        ),
-      ],
+
+          // Hourly Forecast Card
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
+            child: Card(
+              elevation: 0,
+              color: theme.colorScheme.onPrimary,
+              //color: const Color.fromRGBO(48, 48, 48, 1),
+              child: FractionallySizedBox(
+                widthFactor: 1,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 160,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16, right: 16),
+                        child: FadingListView(
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: const [
+                              HourlyWeatherCard(),
+                              HourlyWeatherCard(),
+                              HourlyWeatherCard(),
+                              HourlyWeatherCard(),
+                              HourlyWeatherCard(),
+                              HourlyWeatherCard(),
+                              HourlyWeatherCard(),
+                            ]
+                          )
+                        )
+                      )
+                    )
+                  ],
+                )
+              )
+            )
+          ),
+
+          // Daily Forecast Card
+          Padding(
+            padding: const EdgeInsets.only(top: 8, left: 16, right: 16),
+            child: Card(
+              elevation: 0,
+              color: theme.colorScheme.onPrimary,
+              //color: const Color.fromRGBO(48, 48, 48, 1),
+              child: const FractionallySizedBox(
+                widthFactor: 1,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 320,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 16, right: 16),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            DailyWeatherCard(day: "Monday"),
+                            DailyWeatherCard(day: "Tuesday"),
+                            DailyWeatherCard(day: "Wednesday"),
+                            DailyWeatherCard(day: "Thursday"),
+                            DailyWeatherCard(day: "Friday"),
+                            DailyWeatherCard(day: "Saturday"),
+                            DailyWeatherCard(day: "Sunday"),
+                          ]
+                        )
+                      )
+                    )
+                  ],
+                )
+              )
+            )
+          )
+        ],
+      )
     );
   }
 }
