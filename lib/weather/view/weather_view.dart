@@ -67,6 +67,7 @@ class _WeatherViewState extends State<WeatherView> {
             },
           )
         ),
+        /*
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.search),
           onPressed: () async {
@@ -92,6 +93,7 @@ class _WeatherViewState extends State<WeatherView> {
             */
           }
         ),
+        */
       )
     );
   }
