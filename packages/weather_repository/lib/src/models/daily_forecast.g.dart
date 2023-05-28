@@ -22,6 +22,7 @@ DailyForecast _$DailyForecastFromJson(Map<String, dynamic> json) =>
       weatherCodes: (json['weather_codes'] as List<dynamic>)
           .map((e) => $enumDecode(_$WeatherCodeEnumMap, e))
           .toList(),
+      times: (json['times'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$DailyForecastToJson(DailyForecast instance) =>
@@ -32,6 +33,7 @@ Map<String, dynamic> _$DailyForecastToJson(DailyForecast instance) =>
       'precipitation_probabilities': instance.precipitationProbabilities,
       'weather_codes':
           instance.weatherCodes.map((e) => _$WeatherCodeEnumMap[e]!).toList(),
+      'times': instance.times,
     };
 
 const _$WeatherCodeEnumMap = {

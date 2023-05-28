@@ -26,7 +26,7 @@ class Weather extends Equatable {
   factory Weather.fromJson(Map<String, dynamic> json) => _$WeatherFromJson(json);
   
   factory Weather.fromRepository(weather_repository.WeatherLocation weather) {
-    
+
     return Weather(
       currentWeather: CurrentWeather(
         location: weather.currentWeather.location,
@@ -56,6 +56,27 @@ class Weather extends Equatable {
         temperaturesMin: weather.dailyForecast.temperaturesMin,
         precipitationProbabilities: weather.dailyForecast.precipitationProbabilities,
         weatherCodes: weather.dailyForecast.weatherCodes,
+        times: weather.dailyForecast.times.map((e) {
+          int dayOfWeek = DateTime.parse(e).weekday;
+          switch (dayOfWeek) {
+            case (DateTime.monday):
+              return "Monday";
+            case (DateTime.tuesday):
+              return "Tuesday";
+            case (DateTime.wednesday):
+              return "Wednesday";
+            case (DateTime.thursday):
+              return "Thursday";
+            case (DateTime.friday):
+              return "Friday";
+            case (DateTime.saturday):
+              return "Saturday";
+            case (DateTime.sunday):
+              return "Sunday";
+            default:
+              return "Unknown";
+          }
+        }).toList()
       ),
       updated: DateTime.now(),
     );
@@ -79,7 +100,8 @@ class Weather extends Equatable {
       temperaturesMax: [], 
       temperaturesMin: [], 
       precipitationProbabilities: [],
-      weatherCodes: []
+      weatherCodes: [],
+      times: [],
     ),
     updated: DateTime(0),
   );

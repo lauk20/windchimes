@@ -3,7 +3,20 @@ import 'package:windchimes/weather/widgets/weather_icons.dart';
 
 class DailyWeatherCard extends StatelessWidget {
   final String day;
-  const DailyWeatherCard({required this.day, super.key});
+  final String precipitation;
+  final String weathercode;
+  final String maxTemp;
+  final String minTemp;
+
+  const DailyWeatherCard({
+      required this.day, 
+      required this.precipitation,
+      required this.weathercode,
+      required this.maxTemp,
+      required this.minTemp,
+      super.key
+    }
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +34,30 @@ class DailyWeatherCard extends StatelessWidget {
               style: theme.textTheme.labelSmall
             ),
           ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.water_drop_outlined,
-                size: 15,
-              ),
-              Text("100%"),
-            ],
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.water_drop_outlined,
+                  size: 15,
+                ),
+                Text('$precipitation%'),
+              ],
+            ),
           ),
-          WeatherIcons.sunnyIcon,
-          Text("80° 80°", style: theme.textTheme.labelMedium),
+          const Expanded(
+            child: WeatherIcons.sunnyIcon,
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text("$maxTemp°", style: theme.textTheme.labelMedium),
+                Text("$minTemp°", style: theme.textTheme.labelMedium),
+              ]
+            )
+          )
         ],
       )
     );

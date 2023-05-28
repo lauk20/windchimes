@@ -46,6 +46,7 @@ class WeatherRepository {
       temperaturesMin: List<double>.from(weather.daily['temperature_2m_min']),
       precipitationProbabilities: List<double>.from(weather.daily['precipitation_probability_max'].map((e) => (e as int).toDouble()).toList()),
       weatherCodes: List<WeatherCode>.from(weather.daily['weathercode'].map((e) => (e as int).toCode).toList()),
+      times: List<String>.from(weather.daily['time']),
     );
 
     return WeatherLocation(

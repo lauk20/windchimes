@@ -102,13 +102,7 @@ class WeatherEmpty extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            DailyWeatherCard(day: "Monday"),
-                            DailyWeatherCard(day: "Tuesday"),
-                            DailyWeatherCard(day: "Wednesday"),
-                            DailyWeatherCard(day: "Thursday"),
-                            DailyWeatherCard(day: "Friday"),
-                            DailyWeatherCard(day: "Saturday"),
-                            DailyWeatherCard(day: "Sunday"),
+                            
                           ]
                         )
                       )

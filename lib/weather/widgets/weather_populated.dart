@@ -116,25 +116,28 @@ class WeatherPopulated extends StatelessWidget {
               elevation: 0,
               color: theme.colorScheme.onPrimary,
               //color: const Color.fromRGBO(48, 48, 48, 1),
-              child: const FractionallySizedBox(
+              child: FractionallySizedBox(
                 widthFactor: 1,
                 child: Column(
                   children: [
                     SizedBox(
                       height: 320,
                       child: Padding(
-                        padding: EdgeInsets.only(left: 16, right: 16),
+                        padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            DailyWeatherCard(day: "Monday"),
-                            DailyWeatherCard(day: "Tuesday"),
-                            DailyWeatherCard(day: "Wednesday"),
-                            DailyWeatherCard(day: "Thursday"),
-                            DailyWeatherCard(day: "Friday"),
-                            DailyWeatherCard(day: "Saturday"),
-                            DailyWeatherCard(day: "Sunday"),
-                          ]
+                          children: dailyWeather.times.asMap().entries.map((e) {
+                            int index = e.key;
+                            String time = e.value;
+                            
+                            return DailyWeatherCard(
+                              minTemp: dailyWeather.temperaturesMin[index].toInt().toString(), 
+                              maxTemp: dailyWeather.temperaturesMax[index].toInt().toString(),
+                              precipitation: hourlyWeather.precipitationProbabilities[index].toInt().toString(),
+                              weathercode: hourlyWeather.weatherCodes[index],
+                              day: index == 0 ? "Today" : time,
+                            );
+                          }).toList(),
                         )
                       )
                     )
