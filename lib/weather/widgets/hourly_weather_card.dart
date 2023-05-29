@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:windchimes/weather/widgets/weather_icons.dart';
+import 'package:windchimes/weather/weather.dart';
 
 class HourlyWeatherCard extends StatelessWidget {
   final int temperature;
@@ -29,11 +29,11 @@ class HourlyWeatherCard extends StatelessWidget {
               time, 
               style: theme.textTheme.labelSmall
             ),
-            const Expanded(
+            Expanded(
               child: Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 child: FittedBox(
-                  child: WeatherIcons.sunnyIcon
+                  child: weathercode.getIcon(),
                 )
               )
             ),

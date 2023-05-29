@@ -65,9 +65,9 @@ class WeatherPopulated extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: FittedBox(
-                      child: WeatherIcons.sunnyIcon
+                      child: currentWeather.weathercode.getIcon()
                     )
                   ),
                 ]
@@ -203,26 +203,24 @@ extension on Weather {
   }
 }
 
-extension on WeatherCode {
+extension WeatherIconStringX on String {
   Icon getIcon() {
     switch(this) {
-      case (WeatherCode.clearSky):
+      case ("Sunny"):
         return WeatherIcons.sunnyIcon;
-      case (WeatherCode.mainlyClear):
-        return WeatherIcons.sunnyIcon;
-      case (WeatherCode.partlyCloudy):
+      case ("Partly Cloudy"):
         return WeatherIcons.partlyCloudyIcon;
-      case (WeatherCode.overcast):
+      case ("Cloudy"):
         return WeatherIcons.cloudyIcon;
-      case (WeatherCode.fog):
+      case ("Foggy"):
         return WeatherIcons.foggyIcon;
-      case (WeatherCode.drizzle):
+      case ("Drizzle"):
         return WeatherIcons.rainIcon;
-      case (WeatherCode.rain):
+      case ("Rain"):
         return WeatherIcons.rainIcon;
-      case (WeatherCode.snow):
+      case ("Snow"):
         return WeatherIcons.snowIcon;
-      case (WeatherCode.thunderstorm):
+      case ("Thunderstorm"):
         return WeatherIcons.thunderstormIcon;
       default:
         return WeatherIcons.sunnyIcon;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:windchimes/weather/widgets/weather_icons.dart';
+import 'package:windchimes/weather/weather.dart';
 
 class DailyWeatherCard extends StatelessWidget {
   final String day;
@@ -46,8 +46,8 @@ class DailyWeatherCard extends StatelessWidget {
               ],
             ),
           ),
-          const Expanded(
-            child: WeatherIcons.sunnyIcon,
+          Expanded(
+            child: weathercode.getIcon(),
           ),
           Expanded(
             child: Row(
