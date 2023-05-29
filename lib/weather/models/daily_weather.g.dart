@@ -19,7 +19,7 @@ DailyWeather _$DailyWeatherFromJson(Map<String, dynamic> json) => DailyWeather(
               .map((e) => (e as num).toDouble())
               .toList(),
       weatherCodes: (json['weather_codes'] as List<dynamic>)
-          .map((e) => $enumDecode(_$WeatherCodeEnumMap, e))
+          .map((e) => e as String)
           .toList(),
       times: (json['times'] as List<dynamic>).map((e) => e as String).toList(),
     );
@@ -30,20 +30,6 @@ Map<String, dynamic> _$DailyWeatherToJson(DailyWeather instance) =>
       'temperatures_max': instance.temperaturesMax,
       'temperatures_min': instance.temperaturesMin,
       'precipitation_probabilities': instance.precipitationProbabilities,
-      'weather_codes':
-          instance.weatherCodes.map((e) => _$WeatherCodeEnumMap[e]!).toList(),
+      'weather_codes': instance.weatherCodes,
       'times': instance.times,
     };
-
-const _$WeatherCodeEnumMap = {
-  WeatherCode.clearSky: 'clearSky',
-  WeatherCode.mainlyClear: 'mainlyClear',
-  WeatherCode.partlyCloudy: 'partlyCloudy',
-  WeatherCode.overcast: 'overcast',
-  WeatherCode.fog: 'fog',
-  WeatherCode.drizzle: 'drizzle',
-  WeatherCode.rain: 'rain',
-  WeatherCode.snow: 'snow',
-  WeatherCode.thunderstorm: 'thunderstorm',
-  WeatherCode.undefined: 'undefined',
-};

@@ -10,7 +10,7 @@ class DailyWeather extends Equatable {
   final List<double> temperaturesMax;
   final List<double> temperaturesMin;
   final List<double> precipitationProbabilities;
-  final List<WeatherCode> weatherCodes;
+  final List<String> weatherCodes;
   final List<String> times;
 
   const DailyWeather({
@@ -31,7 +31,7 @@ class DailyWeather extends Equatable {
     List<double>? temperaturesMax,
     List<double>? temperaturesMin,
     List<double>? precipitationProbabilities,
-    List<WeatherCode>? weatherCodes,
+    List<String>? weatherCodes,
     List<String>? times,
   }) {
     return DailyWeather(

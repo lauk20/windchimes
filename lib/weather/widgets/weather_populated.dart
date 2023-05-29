@@ -134,12 +134,16 @@ class WeatherPopulated extends StatelessWidget {
                           children: dailyWeather.times.asMap().entries.map((e) {
                             int index = e.key;
                             String time = e.value;
+
+                            developer.log(dailyWeather.toString());
+                            developer.log(hourlyWeather.precipitationProbabilities[index].toString());
+                            developer.log(hourlyWeather.precipitationProbabilities[index].toInt().toString());
                             
                             return DailyWeatherCard(
                               minTemp: dailyWeather.temperaturesMin[index].toInt().toString(), 
                               maxTemp: dailyWeather.temperaturesMax[index].toInt().toString(),
-                              precipitation: hourlyWeather.precipitationProbabilities[index].toInt().toString(),
-                              weathercode: hourlyWeather.weatherCodes[index],
+                              precipitation: dailyWeather.precipitationProbabilities[index].toInt().toString(),
+                              weathercode: dailyWeather.weatherCodes[index],
                               day: index == 0 ? "Today" : time,
                             );
                           }).toList(),

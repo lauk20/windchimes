@@ -55,7 +55,7 @@ class Weather extends Equatable {
         temperaturesMax: weather.dailyForecast.temperaturesMax,
         temperaturesMin: weather.dailyForecast.temperaturesMin,
         precipitationProbabilities: weather.dailyForecast.precipitationProbabilities,
-        weatherCodes: weather.dailyForecast.weatherCodes,
+        weatherCodes: weather.dailyForecast.weatherCodes.map((e) => e.toName()).toList(),
         times: weather.dailyForecast.times.map((e) {
           int dayOfWeek = DateTime.parse(e).weekday;
           switch (dayOfWeek) {

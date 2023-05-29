@@ -23,12 +23,11 @@ class DailyWeatherCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 16, top: 10, bottom: 10),
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          SizedBox(
-            width: 100,
+          Expanded(
             child: Text(
               day, 
               style: theme.textTheme.labelSmall
@@ -36,27 +35,29 @@ class DailyWeatherCard extends StatelessWidget {
           ),
           Expanded(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Icon(
-                  Icons.water_drop_outlined,
-                  size: 15,
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.water_drop_outlined,
+                      size: 15,
+                    ),
+                    Text('$precipitation%'),
+                  ],
                 ),
-                Text('$precipitation%'),
+                weathercode.getIcon(),
               ],
             ),
           ),
           Expanded(
-            child: weathercode.getIcon(),
-          ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text("$maxTemp°", style: theme.textTheme.labelMedium),
-                Text("$minTemp°", style: theme.textTheme.labelMedium),
-              ]
-            )
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text("$maxTemp°", style: theme.textTheme.labelSmall),
+                  Text("$minTemp°", style: theme.textTheme.labelSmall),
+                ]
+              ),
           )
         ],
       )

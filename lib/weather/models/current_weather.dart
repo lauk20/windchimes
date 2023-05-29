@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather_repository/weather_repository.dart';
 part 'current_weather.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
