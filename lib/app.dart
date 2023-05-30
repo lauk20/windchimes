@@ -49,6 +49,7 @@ class WeatherAppView extends StatelessWidget {
             titleSmall: TextStyle(fontSize: 20),
             labelSmall: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
             labelMedium: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            bodySmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
           ),
           colorScheme: const ColorScheme.dark(
             primary: Color.fromARGB(255, 255, 255, 255),

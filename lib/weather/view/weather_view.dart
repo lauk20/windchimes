@@ -16,7 +16,7 @@ class WeatherPage extends StatelessWidget {
       create: (context) {
         return BlocProvider.of<WeatherCubit>(context);
       },
-      child: const WeatherView(),
+      child: const SearchPage(),
     );
   }
 }
@@ -32,14 +32,43 @@ class _WeatherViewState extends State<WeatherView> {
   @override
   Widget build(BuildContext context) {
     developer.log('rebuilding');
-
+    
     return SafeArea(
       child: Scaffold(
         //backgroundColor:Color.fromRGBO(8, 27, 37, 80),
+        drawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text('Drawer Header'),
+              ),
+              ListTile(
+                title: const Text('Item 1'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: const Text('Item 2'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          )
+        ),
         appBar: AppBar(
-          leading: const Icon(Icons.menu),
-          title: Text("", style: GoogleFonts.montserrat()),
-          centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.transparent,
           scrolledUnderElevation: 0.0,
