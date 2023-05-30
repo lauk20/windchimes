@@ -47,37 +47,35 @@ class _SearchPageState extends State<SearchPage> {
           Text("Add Location", style: theme.textTheme.headlineLarge),
           Padding(
             padding: const EdgeInsets.all(16),
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _textController,
-                        decoration: const InputDecoration(
-                          labelText: 'City',
-                          fillColor: Colors.transparent,
-                          filled: false,
-                        ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _textController,
+                      decoration: const InputDecoration(
+                        labelText: 'City',
+                        fillColor: Colors.transparent,
+                        filled: false,
                       ),
                     ),
-                    BlocBuilder<WeatherCubit, WeatherState> (
-                      builder: (context, state) {
-                        WeatherCubit cubit = BlocProvider.of<WeatherCubit>(context);
-                        return IconButton(
-                          key: const Key('searchPage_search_iconButton'),
-                          icon: const Icon(Icons.search, semanticLabel: 'Submit'),
-                          onPressed: () async {
-                            final locationResults = await cubit.getLocationResults(_text);
-                          }
-                        );
-                      }
-                    )
-                  ],
-                ),
+                  ),
+                  BlocBuilder<WeatherCubit, WeatherState> (
+                    builder: (context, state) {
+                      WeatherCubit cubit = BlocProvider.of<WeatherCubit>(context);
+                      return IconButton(
+                        key: const Key('searchPage_search_iconButton'),
+                        icon: const Icon(Icons.search, semanticLabel: 'Submit'),
+                        onPressed: () async {
+                          final locationResults = await cubit.getLocationResults(_text);
+                        }
+                      );
+                    }
+                  )
+                ],
               ),
             ),
           ),
