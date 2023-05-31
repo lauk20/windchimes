@@ -25,6 +25,7 @@ class _SearchPageState extends State<SearchPage> {
   final TextEditingController _textController = TextEditingController();
 
   String get _text => _textController.text;
+  List<Location> results = [];
 
   @override
   void dispose() {
@@ -70,7 +71,10 @@ class _SearchPageState extends State<SearchPage> {
                         key: const Key('searchPage_search_iconButton'),
                         icon: const Icon(Icons.search, semanticLabel: 'Submit'),
                         onPressed: () async {
-                          final locationResults = await cubit.getLocationResults(_text);
+                          final searchResults = await cubit.getLocationResults(_text);
+                          setState(() {
+                            results = searchResults;
+                          });
                         }
                       );
                     }
@@ -95,18 +99,14 @@ class _SearchPageState extends State<SearchPage> {
                       padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
                       child: FadingListView(
                         child: ListView(
-                          children: [
-                            LocationResultCard(name: "London", admin1: "England", countryName: "United Kingdom"),
-                            LocationResultCard(name: "London", admin1: "England", countryName: "United Kingdom"),
-                            LocationResultCard(name: "London", admin1: "England", countryName: "United Kingdom"),
-                            LocationResultCard(name: "London", admin1: "England", countryName: "United Kingdom"),
-                            LocationResultCard(name: "London", admin1: "England", countryName: "United Kingdom"),
-                            LocationResultCard(name: "London", admin1: "England", countryName: "United Kingdom"),
-                            LocationResultCard(name: "London", admin1: "England", countryName: "United Kingdom"),
-                            LocationResultCard(name: "London", admin1: "England", countryName: "United Kingdom"),
-                            LocationResultCard(name: "London", admin1: "England", countryName: "United Kingdom"),
-                            LocationResultCard(name: "London", admin1: "England", countryName: "United Kingdom"),
-                          ]
+                          children: 
+                            results.map((e) {
+                              return LocationResultCard(
+                                name: e.name, 
+                                admin1: e.admin1, 
+                                countryName: e.country,
+                              );
+                            }).toList()
                         )
                       )
                     )
@@ -118,14 +118,5 @@ class _SearchPageState extends State<SearchPage> {
         ],
       )
     );
-  }
-}
-
-class _LocationResults extends ChangeNotifier {
-  List<Location> results = [];
-
-  void setSearchResults(List<Location> results) {
-    this.results = results;
-    notifyListeners();
   }
 }
