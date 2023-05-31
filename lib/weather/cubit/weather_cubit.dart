@@ -33,6 +33,7 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
         name: loc.name,
         countryId: loc.countryId,
         admin1: loc.admin1,
+        country: loc.country
       );
       final WeatherLocation weatherLocation = await weatherRepository.getLocationWeather(city);
       final Weather weather = Weather.fromRepository(weatherLocation);
@@ -57,6 +58,7 @@ class WeatherCubit extends HydratedCubit<WeatherState> {
       name: e.name,
       countryId: e.countryId,
       admin1: e.admin1,
+      country: e.country,
     )).toList();
   }
 

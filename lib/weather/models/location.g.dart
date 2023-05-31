@@ -12,6 +12,7 @@ Location _$LocationFromJson(Map<String, dynamic> json) => Location(
       name: json['name'] as String,
       countryId: json['country_id'] as int,
       admin1: json['admin1'] as String,
+      country: json['country'] as String,
     );
 
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
@@ -20,4 +21,5 @@ Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
       'name': instance.name,
       'country_id': instance.countryId,
       'admin1': instance.admin1,
+      'country': instance.country,
     };

@@ -66,6 +66,7 @@ class WeatherRepository {
       name: e.name,
       countryId: e.countryId,
       admin1: e.admin1,
+      country: e.country,
     )).toList();
   }
 

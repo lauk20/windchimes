@@ -9,13 +9,15 @@ class CityData {
   final String name;
   final int countryId;
   final String admin1;
+  final String country;
 
   const CityData({
     required this.latitude,
     required this.longitude,
     required this.name,
     required this.countryId,
-    required this.admin1
+    required this.admin1,
+    required this.country,
   });
 
   factory CityData.fromJson(Map<String, dynamic> json) => _$CityDataFromJson(json);

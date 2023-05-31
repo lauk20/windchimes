@@ -10,6 +10,7 @@ class Location extends Equatable {
   final String name;
   final int countryId;
   final String admin1;
+  final String country;
 
   const Location({
     required this.latitude,
@@ -17,6 +18,7 @@ class Location extends Equatable {
     required this.name,
     required this.countryId,
     required this.admin1,
+    required this.country,
   });
 
   factory Location.fromJson(Map<String, dynamic> json) => _$LocationFromJson(json);
@@ -29,6 +31,7 @@ class Location extends Equatable {
     name: 'San Francisco',
     countryId: 6252001,
     admin1: 'California',
+    country: "United States",
   );
 
   @override
