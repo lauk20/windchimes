@@ -16,7 +16,7 @@ class WeatherPage extends StatelessWidget {
       create: (context) {
         return BlocProvider.of<WeatherCubit>(context);
       },
-      child: const SearchPage(),
+      child: const WeatherView(),
     );
   }
 }
@@ -41,12 +41,6 @@ class _WeatherViewState extends State<WeatherView> {
             // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
             children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
-                child: Text('Drawer Header'),
-              ),
               ListTile(
                 title: const Text('Item 1'),
                 onTap: () {

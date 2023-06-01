@@ -42,7 +42,7 @@ class WeatherPopulated extends StatelessWidget {
           children: [
             // Current Weather
             Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24, top: 24, bottom: 32),
+              padding: const EdgeInsets.only(left: 24, right: 24, top: 0, bottom: 32),
               child: IntrinsicHeight(
                 child: Row(
                   children: [
