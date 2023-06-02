@@ -13,6 +13,7 @@ class LocationListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+
     return ListTile(
       title: Text(location.name, style: theme.textTheme.labelMedium),
       subtitle: Text('${location.admin1}, ${location.country}', style: theme.textTheme.bodySmall),
@@ -24,6 +25,9 @@ class LocationListTile extends StatelessWidget {
         // Update the state of the app
         // ...
         // Then close the drawer
+        final WeatherCubit wc = BlocProvider.of<WeatherCubit>(context);
+        wc.setLocation(location);
+        wc.getWeather(location);
         Navigator.pop(context);
       },
     );
