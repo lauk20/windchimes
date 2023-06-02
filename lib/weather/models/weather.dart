@@ -42,6 +42,9 @@ class Weather extends Equatable {
           developer.log(e.toString());
           int hour = DateTime.parse(e).hour;
           if (hour < 12) {
+            if (hour == 0) {
+              return '12 AM';
+            }
             return '${hour.toString()} AM';
           } else if (hour == 12) {
             return '12 PM';
