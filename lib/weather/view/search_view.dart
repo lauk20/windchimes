@@ -6,22 +6,31 @@ import 'package:windchimes/weather/widgets/location_result_card.dart';
 import 'package:windchimes/weather/widgets/widgets.dart';
 import 'dart:developer' as developer;
 
-class SearchPage extends StatefulWidget {
-  const SearchPage._();
-
+class SearchPage extends StatelessWidget {
   const SearchPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const SearchView();
+  }
+}
+
+class SearchView extends StatefulWidget {
+  const SearchView._();
+
+  const SearchView({super.key});
 
   static Route<String> route() {
     return MaterialPageRoute(
-      builder: (_) => const SearchPage._()
+      builder: (_) => const SearchView._()
     );
   }
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  State<SearchView> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SearchPageState extends State<SearchView> {
   final TextEditingController _textController = TextEditingController();
 
   String get _text => _textController.text;
@@ -105,6 +114,7 @@ class _SearchPageState extends State<SearchPage> {
                                 name: e.name, 
                                 admin1: e.admin1, 
                                 countryName: e.country,
+                                location: e,
                               );
                             }).toList()
                         )

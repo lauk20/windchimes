@@ -12,8 +12,14 @@ class LocationListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return ListTile(
-      title: Text(location.name),
+      title: Text(location.name, style: theme.textTheme.labelMedium),
+      subtitle: Text('${location.admin1}, ${location.country}', style: theme.textTheme.bodySmall),
+      trailing: IconButton(
+        icon: const Icon(Icons.delete),
+        onPressed: () => 0,
+      ),
       onTap: () {
         // Update the state of the app
         // ...

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_repository/weather_repository.dart';
 import 'package:windchimes/weather/weather.dart';
+import 'package:windchimes/weather/widgets/location_list_tile.dart';
 import 'search_view.dart';
 import 'dart:developer' as developer;
 import 'package:google_fonts/google_fonts.dart';
@@ -12,12 +13,7 @@ class WeatherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<WeatherCubit>(
-      create: (context) {
-        return BlocProvider.of<WeatherCubit>(context);
-      },
-      child: const WeatherView(),
-    );
+    return const WeatherView();
   }
 }
 
@@ -36,31 +32,26 @@ class _WeatherViewState extends State<WeatherView> {
     return SafeArea(
       child: Scaffold(
         //backgroundColor:Color.fromRGBO(8, 27, 37, 80),
-        drawer: Drawer(
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
-            children: [
-              ListTile(
-                title: const Text('Item 1'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
+        drawer: BlocBuilder<WeatherCubit, WeatherState>(
+          builder: (context, state) {
+            final WeatherCubit wc = BlocProvider.of<WeatherCubit>(context);
+            return Drawer(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: ListView.separated(
+                  itemCount: wc.state.selectedCities.length,
+                  // Important: Remove any padding from the ListView.
+                  padding: EdgeInsets.zero,
+                  separatorBuilder: (context, index) {
+                    return const Divider();
+                  },
+                  itemBuilder: (context, index) {
+                    return LocationListTile(location: wc.state.selectedCities[index]);
+                  }
+                )
               ),
-              ListTile(
-                title: const Text('Item 2'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          )
+            );
+          }
         ),
         appBar: AppBar(
           elevation: 0,

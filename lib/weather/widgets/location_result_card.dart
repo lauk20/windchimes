@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:windchimes/weather/weather.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:developer' as developer;
 
 class LocationResultCard extends StatelessWidget {
   final String name;
   final String admin1;
   final String countryName;
+  final Location location;
 
   const LocationResultCard({
       required this.name,
       required this.admin1,
       required this.countryName,
+      required this.location,
       super.key
     }
   );
@@ -39,7 +43,12 @@ class LocationResultCard extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () => 1, 
+            onPressed: () {
+              final wc = BlocProvider.of<WeatherCubit>(context);
+              developer.log(wc.state.toString() + "ASDFSADFSDF");
+              if (wc.state.selectedCities.contains(location)) return;
+              wc.addLocation(location);
+            }, 
             icon: const Icon(
               Icons.add
             )
