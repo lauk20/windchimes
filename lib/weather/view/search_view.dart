@@ -4,7 +4,6 @@ import 'package:windchimes/weather/cubit/weather_cubit.dart';
 import 'package:windchimes/weather/models/models.dart';
 import 'package:windchimes/weather/widgets/location_result_card.dart';
 import 'package:windchimes/weather/widgets/widgets.dart';
-import 'dart:developer' as developer;
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});

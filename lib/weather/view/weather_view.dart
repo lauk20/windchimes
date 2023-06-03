@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_repository/weather_repository.dart';
 import 'package:windchimes/weather/weather.dart';
 import 'package:windchimes/weather/widgets/location_list_tile.dart';
-import 'search_view.dart';
 import 'dart:developer' as developer;
-import 'package:google_fonts/google_fonts.dart';
 
 
 class WeatherPage extends StatelessWidget {
@@ -37,7 +34,7 @@ class _WeatherViewState extends State<WeatherView> {
             final WeatherCubit wc = BlocProvider.of<WeatherCubit>(context);
             return Drawer(
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: ListView.separated(
                   itemCount: wc.state.selectedCities.length,
                   // Important: Remove any padding from the ListView.

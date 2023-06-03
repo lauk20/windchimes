@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:windchimes/weather/cubit/weather_cubit.dart';
-import 'package:windchimes/weather/models/models.dart';
 import 'package:windchimes/weather/view/weather_view.dart';
 import 'package:windchimes/weather/view/search_view.dart';
 import 'dart:developer' as developer;

@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:windchimes/weather/weather.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_repository/weather_repository.dart';
-import 'package:windchimes/weather/view/search_view.dart';
 import 'package:windchimes/weather/view/main_view.dart';
 import 'dart:developer' as developer;
 
