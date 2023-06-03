@@ -36,6 +36,8 @@ dependencies:
   google_fonts: ^4.0.0
   hydrated_bloc: ^9.0.0
   json_annotation: ^4.8.1
+  notification_service:
+    path: packages/notification_service
   weather_repository:
     path: packages/weather_repository
   path_provider: ^2.0.8

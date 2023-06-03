@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:windchimes/weather/weather.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notification_service/local_notification_service.dart';
 import 'dart:developer' as developer;
 
 class LocationResultCard extends StatelessWidget {
@@ -48,6 +49,7 @@ class LocationResultCard extends StatelessWidget {
               developer.log(wc.state.toString() + "ASDFSADFSDF");
               if (wc.state.selectedCities.contains(location)) return;
               wc.addLocation(location);
+              NotificationService.sendNotif(0, title: "Test", body: "Great Weather", payload: "sunny!");
             }, 
             icon: const Icon(
               Icons.add
