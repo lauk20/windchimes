@@ -1,4 +1,5 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:timezone/timezone.dart' as tz;
 import 'dart:developer' as developer;
 
 class NotificationService {
@@ -41,5 +42,24 @@ class NotificationService {
       payload: payload,
     );
     developer.log("should see notif now");
+  }
+
+  static Future<void> scheduleNotif(List<tz.TZDateTime> times, int id, String title, String body,) async {
+    for (int i = 0; i < times.length; i++) {
+      await flutterLocalNotificationsPlugin.zonedSchedule(
+        id, 
+        title, 
+        body,
+        times[i], 
+        const NotificationDetails(
+            android: AndroidNotificationDetails('weekly notification channel id',
+                'weekly notification channel name',
+                channelDescription: 'weekly notificationdescription'),
+          ), 
+        uiLocalNotificationDateInterpretation:
+              UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime
+      );
+    }
   }
 }
