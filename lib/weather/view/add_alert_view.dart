@@ -34,7 +34,7 @@ class _AddAlertPageState extends State<AddAlertView> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    var hour = selectedTime.hour - 12;
+    var hour = selectedTime.hour > 12 ? selectedTime.hour - 12 : selectedTime.hour;
     if (hour == 0) {
       hour = 12;
     }
