@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:windchimes/weather/cubit/notification_cubit.dart';
-import 'package:windchimes/weather/cubit/weather_cubit.dart';
-import 'package:windchimes/weather/models/models.dart';
-import 'package:windchimes/weather/widgets/widgets.dart';
 
 class AddAlertPage extends StatelessWidget {
   const AddAlertPage({super.key});
@@ -57,7 +52,7 @@ class _AddAlertPageState extends State<AddAlertView> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Text('$hour:${selectedTime.minute}', style: theme.textTheme.displayLarge)
+            child: Text('$hour:${selectedTime.minute.toString().padLeft(2, '0')}', style: theme.textTheme.displayLarge)
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
@@ -256,6 +251,23 @@ class _AddAlertPageState extends State<AddAlertView> {
                 )
               )
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: TextButton(
+              onPressed: () async {
+                Navigator.pop(context, selectedTime);
+              }, 
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(theme.colorScheme.onPrimary), 
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  )
+                )
+              ),
+              child: Text("Save", style: theme.textTheme.titleMedium),
+            )
           )
         ]
       )
