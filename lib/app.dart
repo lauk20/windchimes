@@ -5,6 +5,7 @@ import 'package:windchimes/weather/weather.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_repository/weather_repository.dart';
 import 'package:windchimes/weather/view/main_view.dart';
+import 'package:windchimes/weather/models/notification.dart' as notif;
 import 'dart:developer' as developer;
 
 class WeatherApp extends StatelessWidget {
@@ -27,16 +28,36 @@ class WeatherAppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<WeatherCubit> (
-      lazy: false,
-      create: (context) {
-        developer.log("inside");
-        WeatherCubit wc = WeatherCubit(context.read<WeatherRepository>());
-        developer.log(wc.state.toString());
-        wc.getWeather(wc.state.selectedCity);
-        developer.log(wc.state.weather.toString());
-        return wc;
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<WeatherCubit>(
+          lazy: false,
+          create: (context) {
+            developer.log("inside");
+            WeatherCubit wc = WeatherCubit(context.read<WeatherRepository>());
+            developer.log(wc.state.toString());
+            wc.getWeather(wc.state.selectedCity);
+            developer.log(wc.state.weather.toString());
+            return wc;
+          },
+        ),
+        BlocProvider<NotificationCubit>(
+          lazy: false,
+          create: (context) {
+            NotificationCubit nc = NotificationCubit();
+            final notification = notif.Notification(notificationID: 123, location: Location(
+                                    latitude: 12,
+                                    longitude: 12,
+                                    name: "",
+                                    countryId: 123,
+                                    admin1: "a",
+                                    country: "a",
+                                  ));
+            nc.addNotification(notification);
+            return nc;
+          }
+        )
+      ],
       child: MaterialApp(
         theme: ThemeData(
           useMaterial3: true,
