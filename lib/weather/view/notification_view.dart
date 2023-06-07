@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:windchimes/weather/cubit/notification_cubit.dart';
-import 'package:windchimes/weather/cubit/weather_cubit.dart';
 import 'package:windchimes/weather/models/models.dart';
+import 'package:windchimes/weather/models/notification.dart' as notif;
 import 'package:windchimes/weather/view/add_alert_view.dart';
 import 'package:windchimes/weather/widgets/widgets.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -54,12 +55,34 @@ class _NotificationPageState extends State<NotificationView> {
                   icon: const Icon(
                     Icons.add
                   ),
-                  onPressed: () {
-                    Navigator.of(context).push(
+                  onPressed: () async {
+                    final List items = await Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => const AddAlertPage()
                       ),
                     );
+
+                    /*
+                    List<tz.TZDateTime> times = notif.Notification.getDateTime(
+                      sunday: items[1], 
+                      monday: items[2], 
+                      tuesday: items[3], 
+                      wednesday: items[4], 
+                      thursday: items[5], 
+                      friday: items[6], 
+                      saturday: items[7], 
+                      selectedTime: items[0]
+                    );
+
+                    notif.Notification n = notif.Notification(
+                      location: Location.initialLocationState,
+                      notificationID: NotificationState.idCounter,
+                    );
+
+                    n.addDateAndTimes(times);
+                    final nc = BlocProvider.of<NotificationCubit>(context);
+                    nc.addNotification(n);
+                    */
                   }
                 ),
               ],
@@ -84,7 +107,7 @@ class _NotificationPageState extends State<NotificationView> {
                             children: 
                               state.notifications.map((e) {
                                 return LocationResultCard(
-                                  name: e.name, 
+                                  name: e.dateAndTimes.toString(), 
                                   admin1: e.name, 
                                   countryName: e.name,
                                   location: Location(

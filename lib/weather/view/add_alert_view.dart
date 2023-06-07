@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:windchimes/weather/cubit/notification_cubit.dart';
+import 'package:windchimes/weather/models/models.dart';
+import 'package:windchimes/weather/models/notification.dart' as notif;
+import 'package:timezone/timezone.dart' as tz;
+import 'dart:developer' as developer;
 
 class AddAlertPage extends StatelessWidget {
   const AddAlertPage({super.key});
@@ -255,8 +261,29 @@ class _AddAlertPageState extends State<AddAlertView> {
           Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: TextButton(
-              onPressed: () async {
-                Navigator.pop(context, selectedTime);
+              onPressed: () {
+                final items = [selectedTime, sunday, monday, tuesday, wednesday, thursday, friday, saturday];
+                
+                List<tz.TZDateTime> times = notif.Notification.getDateTime(
+                  sunday: items[1], 
+                  monday: items[2], 
+                  tuesday: items[3], 
+                  wednesday: items[4], 
+                  thursday: items[5], 
+                  friday: items[6], 
+                  saturday: items[7], 
+                  selectedTime: selectedTime,
+                );
+
+                notif.Notification n = notif.Notification(
+                  location: Location.initialLocationState,
+                  notificationID: NotificationState.idCounter,
+                );
+                developer.log(times.toString());
+                n.addDateAndTimes(times);
+                final nc = BlocProvider.of<NotificationCubit>(context);
+                nc.addNotification(n);
+                Navigator.pop(context, [selectedTime, sunday, monday, tuesday, wednesday, thursday, friday, saturday]);
               }, 
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(theme.colorScheme.onPrimary), 
