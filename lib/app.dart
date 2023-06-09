@@ -45,15 +45,6 @@ class WeatherAppView extends StatelessWidget {
           lazy: false,
           create: (context) {
             NotificationCubit nc = NotificationCubit();
-            final notification = notif.Notification(notificationID: 123, location: Location(
-                                    latitude: 12,
-                                    longitude: 12,
-                                    name: "",
-                                    countryId: 123,
-                                    admin1: "a",
-                                    country: "a",
-                                  ));
-            nc.addNotification(notification);
             return nc;
           }
         )

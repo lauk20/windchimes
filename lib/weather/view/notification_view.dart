@@ -6,6 +6,7 @@ import 'package:windchimes/weather/models/notification.dart' as notif;
 import 'package:windchimes/weather/view/add_alert_view.dart';
 import 'package:windchimes/weather/widgets/widgets.dart';
 import 'package:timezone/timezone.dart' as tz;
+import 'dart:developer' as developer;
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -106,18 +107,11 @@ class _NotificationPageState extends State<NotificationView> {
                           child: ListView(
                             children: 
                               state.notifications.map((e) {
-                                return LocationResultCard(
-                                  name: e.dateAndTimes.toString(), 
-                                  admin1: e.name, 
-                                  countryName: e.name,
-                                  location: Location(
-                                    latitude: 12,
-                                    longitude: 12,
-                                    name: "",
-                                    countryId: 123,
-                                    admin1: "a",
-                                    country: "a",
-                                  )
+                                developer.log(e.dateAndTimes.toString());
+                                return AlertCard(
+                                  name: "",
+                                  times: e.dateAndTimes,
+                                  id: e.notificationID,
                                 );
                               }).toList()
                           )

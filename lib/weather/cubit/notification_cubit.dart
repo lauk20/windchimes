@@ -25,6 +25,7 @@ class NotificationCubit extends HydratedCubit<NotificationState> {
   void removeNotification(int notificationID) {
     final newList = List<Notification>.from(state.notifications);
     newList.removeWhere((element) => element.notificationID == notificationID);
+    NotificationService.removeNotif(notificationID);
     emit(state.copyWith(
       notifications: newList,
     ));
