@@ -19,7 +19,13 @@ class LocationListTile extends StatelessWidget {
       subtitle: Text('${location.admin1}, ${location.country}', style: theme.textTheme.bodySmall),
       trailing: IconButton(
         icon: const Icon(Icons.delete),
-        onPressed: () => 0,
+        onPressed: () {
+          final WeatherCubit wc = BlocProvider.of<WeatherCubit>(context);
+          if (wc.state.selectedCities.length == 1) {
+            return;
+          }
+          wc.removeLocation(location.name);
+        }
       ),
       onTap: () {
         // Update the state of the app
