@@ -49,7 +49,6 @@ class LocationResultCard extends StatelessWidget {
               developer.log(wc.state.toString() + "ASDFSADFSDF");
               if (wc.state.selectedCities.contains(location)) return;
               wc.addLocation(location);
-              NotificationService.sendNotif(0, title: "Test", body: "Great Weather", payload: "sunny!");
             }, 
             icon: const Icon(
               Icons.add
