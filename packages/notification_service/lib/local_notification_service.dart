@@ -62,4 +62,8 @@ class NotificationService {
       );
     }
   }
+
+  static Future<void> removeNotif(int id) async {
+    await flutterLocalNotificationsPlugin.cancel(id);
+  }
 }
